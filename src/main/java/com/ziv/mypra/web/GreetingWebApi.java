@@ -18,4 +18,3 @@ public class GreetingWebApi {
         return greetingService.greeting("test");
     }
 }
- 
