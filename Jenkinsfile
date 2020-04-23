@@ -3,8 +3,8 @@ pipeline {
     tools {
         maven 'local maven'
     }
-    stages{
-        stage('Init'){
+    stages {
+        stage('Init') {
             steps {
                 sh 'mvn clean package'
             }
@@ -15,4 +15,5 @@ pipeline {
                 }
             }
         }
+    }
 }
