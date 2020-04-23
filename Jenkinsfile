@@ -29,7 +29,7 @@ pipeline {
             parallel {
                 stage('Deploy to Staging') {
                     steps {
-                        sh "scp -i/Users/ziv/Documents/myawsssl/tomcat.pem **/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat8/webapps"
+                        sh "scp -i /Users/ziv/Documents/myawsssl/tomcat.pem **/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat8/webapps"
                     }
                 }
             }
