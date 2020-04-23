@@ -1,7 +1,16 @@
 pipeline {
     agent any
+
     tools {
         maven 'local maven'
+    }
+
+    parameter {
+        string(name: 'tomcat_dev', defaultValue: '54.236.216.8', description: 'staging server')
+    }
+
+    trigger {
+        pollSCM('* * * * *')
     }
     stages {
         stage('Build') {
@@ -10,15 +19,21 @@ pipeline {
             }
             post {
                 success {
-                    echo 'save file...'
-                    archiveArtifacts artifacts: '**//*.war'
+                    echo '開始儲存...'
+                    archiveArtifacts artifacts: '**/*.war'
                 }
             }
         }
-        stage('deploy to staging') {
-            steps {
-                build job: 'deploy to staging'
+
+        stage('Deployments') {
+            parallel {
+                stage('Deploy to Staging') {
+                    steps {
+                        sh "scp -i/Users/ziv/Documents/myawsssl/tomcat.pem **/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat8/webapps"
+                    }
+                }
             }
         }
     }
+
 }
