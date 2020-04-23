@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        maven 'local maven'
+    }
     stages{
         stage('Init'){
             steps {
@@ -12,5 +15,4 @@ pipeline {
                 }
             }
         }
-
 }
