@@ -5,11 +5,11 @@ pipeline {
         maven 'local maven'
     }
 
-    parameter {
+    parameters {
         string(name: 'tomcat_dev', defaultValue: '54.236.216.8', description: 'staging server')
     }
 
-    trigger {
+    triggers {
         pollSCM('* * * * *')
     }
     stages {
